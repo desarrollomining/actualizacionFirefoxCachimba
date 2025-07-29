@@ -3,7 +3,7 @@ import socket
 import time
 import urllib.request
 import os
-
+import glob
 import json
 
 # Identificacion del equipo
@@ -37,7 +37,9 @@ def cleanCache():
         process = subprocess.Popen(['rm','-rf','/home/pi/.config/chromium//Default/Cookies'])
         process = subprocess.Popen(['rm','-rf','/home/pi/.config/chromium//Default/History'])
         process = subprocess.Popen(['rm','-rf','/home/pi/.config/chromium//Default/Web\ Data'])
-
+        perfiles = glob.glob('/home/pi/.var/app/org.mozilla.firefox/cache/mozilla/firefox/*/cache2')
+        for ruta in perfiles:
+            subprocess.Popen(['rm', '-rf', ruta])
         print("Cache borrado")
     except:
         print("Error al eliminar el cache")
